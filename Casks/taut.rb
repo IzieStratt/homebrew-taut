@@ -1,5 +1,5 @@
 cask "taut" do
-  version "latest"
+  version :latest
   sha256 :no_check
 
   url "https://github.com/IzieStratt/taut/releases/download/latest/taut-mac.dmg"
