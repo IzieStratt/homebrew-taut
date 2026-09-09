@@ -6,8 +6,7 @@ Install Taut on macOS with [Homebrew](https://brew.sh/):
   - Run in your terminal: (supports Intel and Apple Silicon)
     ```sh
     brew tap IzieStratt/taut
-    brew install --cask taut
-    xattr -d com.apple.quarantine /Applications/Taut.app
+    brew install --cask --no-quarantine taut
     ```
 
 The cask follows Taut's rolling `latest` GitHub release directly. No Taut
