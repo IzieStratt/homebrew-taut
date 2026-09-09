@@ -32,8 +32,15 @@ jobs:
           version="$(date -u -d "$asset_updated" +%Y.%m.%d.%H%M)"
           export VERSION="$version" SHA256="$sha256"
 
-          ruby -0pi -e "gsub(/version (?:\\\"[^\\\"]+\\\"|:latest)/, 'version \\\"#{ENV.fetch(\"VERSION\")}\\\"'); gsub(/sha256 (?:\\\"[0-9a-f]+\\\"|:no_check)/, 'sha256 \\\"#{ENV.fetch(\"SHA256\")}\\\"')" \
-            Casks/taut.rb
+          ruby <<'RUBY'
+          path = 'Casks/taut.rb'
+          cask = File.read(path)
+          cask.sub!(/version (?:"[^"]+"|:latest)/,
+            %(version "#{ENV.fetch('VERSION')}"))
+          cask.sub!(/sha256 (?:"[0-9a-f]+"|:no_check)/,
+            %(sha256 "#{ENV.fetch('SHA256')}"))
+          File.write(path, cask)
+          RUBY
           if git diff --quiet -- Casks/taut.rb; then
             exit 0
           fi
