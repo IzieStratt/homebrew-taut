@@ -16,7 +16,7 @@ cask "taut" do
   app "Taut.app"
 
   caveats <<~EOS
-    \033[1;32m**** IMPORTANT: Before launching Taut, run: ****
+    \033[1;32m**** Taut is unsigned. Before opening it for the first time, run (if you haven't already): ****
       xattr -d com.apple.quarantine /Applications/Taut.app
     **** Otherwise macOS may block the unsigned app. ****\033[0m
 
