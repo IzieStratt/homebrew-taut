@@ -39,6 +39,8 @@ jobs:
             %(version "#{ENV.fetch('VERSION')}"))
           cask.sub!(/sha256 (?:"[0-9a-f]+"|:no_check)/,
             %(sha256 "#{ENV.fetch('SHA256')}"))
+          cask.sub!(/url "(https:\/\/github\.com\/jeremy46231\/taut\/releases\/download\/latest\/taut-mac\.dmg)(?:\?v=[^"]+)?"/,
+            %(url "#{Regexp.last_match(1)}?v=#{ENV.fetch('VERSION')}"))
           File.write(path, cask)
           RUBY
           if git diff --quiet -- Casks/taut.rb; then
