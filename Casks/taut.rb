@@ -1,6 +1,6 @@
 cask "taut" do
-  version :latest
-  sha256 :no_check
+  version "2026.08.19.2106"
+  sha256 "4cfa3a085793e904c5429c0b9564d7a4bb2cac34208c115e171be4cab88b530b"
 
   url "https://github.com/jeremy46231/taut/releases/download/latest/taut-mac.dmg"
   name "Taut"
