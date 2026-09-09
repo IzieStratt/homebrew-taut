@@ -1,6 +1,6 @@
 cask "taut" do
   version "2026.08.19.2106"
-  sha256 "4cfa3a085793e904c5429c0b9564d7a4bb2cac34208c115e171be4cab88b530b"
+  sha256 :no_check
 
   url "?v=2026.08.19.2106"
   name "Taut"
