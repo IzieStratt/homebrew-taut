@@ -2,10 +2,10 @@ cask "taut" do
   version :latest
   sha256 :no_check
 
-  url "https://github.com/IzieStratt/taut/releases/download/latest/taut-mac.dmg"
+  url "https://github.com/jeremy46231/taut/releases/download/latest/taut-mac.dmg"
   name "Taut"
   desc "Client mod for Slack"
-  homepage "https://github.com/IzieStratt/taut"
+  homepage "https://github.com/jeremy46231/taut"
 
   app "Taut.app"
 
