@@ -1,0 +1,45 @@
+name: Update cask
+
+on:
+  schedule:
+    - cron: "17 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Check upstream release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          asset_url="$(gh api repos/jeremy46231/taut/releases/tags/latest \
+            --jq '.assets[] | select(.name == "taut-mac.dmg") | .browser_download_url')"
+          asset_updated="$(gh api repos/jeremy46231/taut/releases/tags/latest \
+            --jq '.assets[] | select(.name == "taut-mac.dmg") | .updated_at')"
+          test -n "$asset_url"
+          test -n "$asset_updated"
+
+          curl --fail --location --silent --show-error "$asset_url" \
+            --output "$RUNNER_TEMP/taut-mac.dmg"
+          sha256="$(sha256sum "$RUNNER_TEMP/taut-mac.dmg" | cut -d' ' -f1)"
+          version="$(date -u -d "$asset_updated" +%Y.%m.%d.%H%M)"
+          export VERSION="$version" SHA256="$sha256"
+
+          ruby -0pi -e "gsub(/version (?:\\\"[^\\\"]+\\\"|:latest)/, 'version \\\"#{ENV.fetch(\"VERSION\")}\\\"'); gsub(/sha256 (?:\\\"[0-9a-f]+\\\"|:no_check)/, 'sha256 \\\"#{ENV.fetch(\"SHA256\")}\\\"')" \
+            Casks/taut.rb
+          if git diff --quiet -- Casks/taut.rb; then
+            exit 0
+          fi
+
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add Casks/taut.rb
+          git commit -m "Update Taut cask to $version"
+          git push
