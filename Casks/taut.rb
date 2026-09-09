@@ -2,7 +2,13 @@ cask "taut" do
   version "2026.08.19.2106"
   sha256 :no_check
 
-  url "https://github.com/jeremy46231/taut/releases/download/latest/taut-mac.dmg"
+  on_arm do
+    url "https://github.com/jeremy46231/taut/releases/download/latest/taut-mac.dmg"
+  end
+
+  on_intel do
+    url "https://github.com/jeremy46231/taut/releases/download/latest/taut-mac-x64.dmg"
+  end
   name "Taut"
   desc "Client mod for Slack"
   homepage "https://github.com/jeremy46231/taut"
