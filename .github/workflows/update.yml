@@ -37,11 +37,6 @@ jobs:
           cask = File.read(path)
           cask.sub!(/version (?:"[^"]+"|:latest)/,
             %(version "#{ENV.fetch('VERSION')}"))
-          url_match = cask.match(/url "(https:\/\/github\.com\/jeremy46231\/taut\/releases\/download\/latest\/taut-mac\.dmg)(?:\?v=[^"]+)?"/)
-          if url_match
-            cask.sub!(url_match[0],
-              %(url "#{url_match[1]}?v=#{ENV.fetch('VERSION')}"))
-          end
           File.write(path, cask)
           RUBY
           if git diff --quiet -- Casks/taut.rb; then
