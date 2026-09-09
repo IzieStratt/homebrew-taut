@@ -1,5 +1,7 @@
 # Taut Homebrew Tap
 
+This may be behind by up to a day.
+
 Install Taut on macOS with [Homebrew](https://brew.sh/):
   - Run in your terminal: (supports Intel and Apple Silicon)
     ```sh
