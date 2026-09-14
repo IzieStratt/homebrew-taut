@@ -1,5 +1,5 @@
 cask "taut" do
-  version "2026.08.19.2106"
+  version "2026.09.13.1541"
   sha256 :no_check
 
   on_arm do
