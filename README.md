@@ -1,3 +1,6 @@
+> [!NOTE]
+> Taut now natively supports installing with homebrew, so this is no longer needed.
+
 # Taut Homebrew Tap
 
 This may be behind by up to a day.
